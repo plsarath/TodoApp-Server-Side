@@ -1,0 +1,66 @@
+<html ng-app="TodoApp">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://code.angularjs.org/1.6.1/angular.min.js"></script>
+        <script src="TodoApp.js"></script>
+    </head>
+
+    <body>
+        <div ng-controller="TodoController as todoCtrl">
+            <form>
+                <div class="form-group">
+                    <div class="col-md-3"> 
+                        <input type="text" class="form-control" 
+                            ng-model="todoCtrl.newTodoName" placeholder="Enter the Todo name">
+
+                    </div>
+                    <div class="col-md-3"> 
+                          <input type="date" class="form-control" 
+                            ng-model="todoCtrl.newTodoDate">
+                    </div>
+
+                    <div class="col-md-3">
+                        <textarea ng-model="todoCtrl.newTodoNotes" class="form-control"></textarea>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-success" ng-click="todoCtrl.addTodo()"> Add Todo</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item" ng-repeat="todo in todoCtrl.todos" 
+                                    ng-click="todoCtrl.showTodo(todo)">
+                                <h4 class="list-group-item-heading" ng-bind="todo.name"></h4>
+                                <p class="list-group-item-text">{{todo.date | date: "MMMM-dd-y"}}</p>
+                            </a>
+
+                        </div>
+
+                    </div>
+                
+                
+                </div>
+
+
+            </form>
+
+        </div>
+
+        <div ng-controller="NotesController as nCtrl">
+            <div class="form-group" ng-show="nCtrl.selectedTodo">
+                <div class="col-md-12">
+                    <div class="alert alert-info">
+                           {{nCtrl.selectedTodo.notes}}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        
+    </body>
+
+</html>
